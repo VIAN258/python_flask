@@ -1,4 +1,4 @@
-from flask import Flask, jsonify 
+from flask import Flask, jsonify, request 
 app = Flask(__name__)
 
 todos = [
@@ -10,6 +10,12 @@ todos = [
 def hello_world():
     json_text = jsonify(todos)
     return json_text
+
+@app.route('/todos', methods=['POST'])
+def add_new_todo():
+    request_body = request.data
+    print("Incoming request with the following body", request_body)
+    return 'Response for the POST todo'
     
 
 if __name__ =='__main__':
